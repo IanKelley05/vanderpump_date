@@ -341,6 +341,11 @@
             align-items: center;
             justify-content: center;
             padding: 80px 20px;
+            /* Added smooth gradient background for subtle visual contrast */
+            background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-mid) 20%, var(--purple-mid) 80%, var(--purple-deep) 100%);
+            border-top: 1px solid rgba(232, 201, 106, 0.05);
+            border-bottom: 1px solid rgba(232, 201, 106, 0.05);
+            position: relative;
         }
 
         .gatekeeper-layout {
@@ -422,12 +427,12 @@
         #error-message { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(220, 80, 100, 0.85); display: none; margin-top: 16px; animation: shake 0.35s ease; }
 
         /* =============================================
-           ITINERARY SECTION (Updated with Previews)
+           ITINERARY SECTION
            ============================================= */
         .itinerary-section {
             padding: 100px clamp(20px, 5vw, 48px);
         }
-        #itinerary-wrapper { position: relative; max-width: 800px; margin: 0 auto; } /* Wider to accommodate bigger boxes */
+        #itinerary-wrapper { position: relative; max-width: 800px; margin: 0 auto; }
         #itinerary-content { filter: blur(10px); pointer-events: none; transition: filter 1.8s var(--transition-smooth); user-select: none; }
         #itinerary-content.unlocked { filter: blur(0); pointer-events: auto; user-select: auto; }
         #velvet-rope { position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0; transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s var(--transition-smooth); pointer-events: auto; background: linear-gradient(180deg, rgba(14, 0, 18, 0.05) 0%, rgba(14, 0, 18, 0.85) 30%, rgba(14, 0, 18, 0.85) 70%, rgba(14, 0, 18, 0.05) 100%); }
@@ -448,14 +453,13 @@
         .itinerary-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 400; color: var(--gold-bright); letter-spacing: 0.12em; margin-bottom: 8px; }
         .itinerary-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1rem, 3.5vw, 1.2rem); color: var(--text-muted); }
         
-        /* Enlarged Agenda Cards */
         .agenda-card { 
             background: rgba(20, 4, 28, 0.6); 
             backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px); 
             border: 1px solid rgba(232, 201, 106, 0.12); 
             border-radius: 2px; 
-            padding: clamp(30px, 6vw, 50px); /* Bigger padding */
+            padding: clamp(30px, 6vw, 50px);
             margin-bottom: clamp(24px, 4vw, 36px); 
             position: relative; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(232, 201, 106, 0.05); 
@@ -467,7 +471,6 @@
         .course-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 5vw, 1.8rem); font-weight: 600; color: var(--gold-bright); margin-bottom: 16px; line-height: 1.3; }
         .course-desc { font-size: clamp(0.95rem, 3vw, 1.05rem); color: var(--text-muted); line-height: 1.8; margin-bottom: 0; }
         
-        /* Preview Embed Styles */
         .preview-link {
             display: block;
             margin-top: 24px;
@@ -518,12 +521,10 @@
             width: 100%;
             height: 100%;
             border: none;
-            /* Prevents interacting with the iframe directly, so the link click fires */
             pointer-events: none; 
             transform-origin: top center;
         }
         
-        /* Semi-transparent overlay to ensure the iframe looks like a thumbnail */
         .iframe-overlay {
             position: absolute;
             inset: 0;
@@ -762,6 +763,9 @@
                 lightSwitch.dispatchEvent(new Event('change'));
             }
         });
+
+        const guessWhoLink = document.querySelector('.agenda-card:nth-child(2) .course-cta');
+        if (guessWhoLink) { guessWhoLink.textContent = "Play Guess Who"; }
 
         function checkPassword() {
             const input      = document.getElementById('passcode').value.trim().toLowerCase();
